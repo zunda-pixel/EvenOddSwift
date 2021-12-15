@@ -6,13 +6,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: fwal/setup-swift@v1
 
-      - name: compile
+      - uses: actions/checkout@
+
+      - name: Build
         run: swift build -c release
 
       - name: upload release
         uses: shogo82148/actions-upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./EvenOddSwift
+          asset_path: .build/release/EvenOddSwift
