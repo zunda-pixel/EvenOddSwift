@@ -1,6 +1,10 @@
 import Foundation
-import FoundationNetworking
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
+#if compiler(>=5.5.2) && canImport(_Concurrency)
 extension URLSession {
     func data(from url: URL) async throws -> (Data, URLResponse) {
         return try await withCheckedThrowingContinuation { continuation in
@@ -28,3 +32,5 @@ extension URLSession {
         }
     }
 }
+
+#endif

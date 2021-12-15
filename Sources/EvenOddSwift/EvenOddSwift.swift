@@ -1,6 +1,10 @@
 import Foundation
-import FoundationNetworking
 
+#if os(Linux)
+import FoundationNetworking
+#endif
+
+@available(macOS 12.0.0, *)
 @main
 struct EvenOddSwift {
     static func main() async {
@@ -23,6 +27,7 @@ struct EvenOddSwift {
     }
 }
 
+@available(macOS 12.0.0, *)
 func isEven(number: Int) async throws -> Bool {
     let baseURL: URL = .init(string: "https://api.isevenapi.xyz/api/iseven/")!
     let url: URL = baseURL.appendingPathComponent("\(number)")

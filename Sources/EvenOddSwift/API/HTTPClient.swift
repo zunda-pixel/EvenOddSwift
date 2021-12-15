@@ -1,6 +1,9 @@
 
 import Foundation
+
+#if os(Linux)
 import FoundationNetworking
+#endif
 
 public enum HTTPError : Error {
     case InvalidURL
@@ -14,6 +17,7 @@ public enum HTTPMethod : String {
     case POST
 }
 
+@available(macOS 12.0.0, *)
 struct HTTPClient {
     private static func request(method: HTTPMethod, url urlString: String, headers: [String: String] = [:], queries: [String: String] = [:]) async throws -> (Data, URLResponse) {
         guard var urlComponents = URLComponents(string: urlString) else {
