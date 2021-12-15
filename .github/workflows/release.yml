@@ -1,0 +1,18 @@
+name: compile and upload release
+
+on: [release]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: compile
+        run: swift build -c release
+
+      - name: upload release
+        uses: shogo82148/actions-upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./EvenOddSwift
