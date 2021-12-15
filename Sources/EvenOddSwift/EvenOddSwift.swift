@@ -4,7 +4,15 @@ import FoundationNetworking
 @main
 struct EvenOddSwift {
     static func main() async {
-        let number = 10
+        if (CommandLine.arguments.count < 2) {
+            print("Please provide a number")
+            return
+        }
+
+        guard let number = Int(CommandLine.arguments[1]) else {
+            print("Please provide a number")
+            return
+        }
 
         do {
             let isEven = try await isEven(number: number)
