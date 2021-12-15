@@ -2,7 +2,7 @@ import Foundation
 import FoundationNetworking
 
 extension URLSession {
-    func data(from url: URL, delegate: URLSessionTaskDelegate? = nil) async throws -> (Data, URLResponse) {
+    func data(from url: URL) async throws -> (Data, URLResponse) {
         return try await withCheckedThrowingContinuation { continuation in
             let task = dataTask(with: url) { data, response, error in
                 if let error = error {
@@ -15,7 +15,7 @@ extension URLSession {
         }
     }
 
-    func data(for urlRequest: URLRequest, delegate: URLSessionTaskDelegate? = nil) async throws -> (Data, URLResponse) {
+    func data(for urlRequest: URLRequest) async throws -> (Data, URLResponse) {
         return try await withCheckedThrowingContinuation { continuation in
             let task = dataTask(with: urlRequest) { data, response, error in
                 if let error = error {
